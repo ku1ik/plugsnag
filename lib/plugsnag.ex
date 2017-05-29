@@ -16,6 +16,10 @@ defmodule Plugsnag do
         end
       end
 
+      defp handle_errors(_conn, %{reason: %Phoenix.NotAcceptableError{}}) do
+        nil
+      end
+
       defp handle_errors(conn, %{reason: exception}) do
         error_report_builder = unquote(
           Keyword.get(
